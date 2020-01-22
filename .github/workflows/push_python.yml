@@ -1,0 +1,20 @@
+name: Push Python
+on: push
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    name: Python File Push Test
+    steps:
+    - uses: actions/checkout@v1
+    - name: Push
+      id: push
+      uses: apoclyps/python-github-action@master
+      with:
+        api-key: ${{ secrets.CLOUDSMITH_API_KEY }}
+        command: 'push'
+        format: 'python'
+        owner: 'apoclyps'
+        repo: 'testing-private'
+        file: 'test/fixture/requests-2.22.0.tar.gz'
+        republish: 'true'
